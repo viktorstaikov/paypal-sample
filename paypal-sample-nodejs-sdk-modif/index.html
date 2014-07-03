@@ -22,18 +22,48 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="kendo/styles/kendo.dataviz.mobile.min.css" />
         <title>Hello World!</title>
     </head>
     <body>
-        <div class="app">
+        <div class="">
             <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
+            <div id="deviceready" class="">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+            <button id='pay-btn'>CREATE PAYMENT</button>
+             
+            <div id='pay-status'>
+                no payment
+            </div>
         </div>
+        
+        <div id="users-list" class="view users-list" data-role="view" data-model="app.paymentsModel" data-title="Users">
+            <div data-role="header">
+                <div data-role="navbar">
+                    Payments
+                </div>
+            </div>
+
+            <ul id="payments-list-view" class="payments-list-view" data-bind="source: paymentsDataSource" data-template="payment-template" data-role="listview" data-click="app.paymentsModel.onPaymentSelected"></ul>
+
+            <div data-role="footer">
+                <span data-role="touch" data-bind="events: { tap: handlePayAll }">
+                	<a data-role="button" class="btn btn-action">PAY ALL</a>
+                </span>
+            </div>
+        </div>
+
+        <script id="payment-template" type="text/x-kendo-template">
+            <div>#: description #</div><div>#: amount.total + ' ' + amount.currency#</div>
+        </script>
+        
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="kendo/js/jquery.min.js"></script>
+        <script type="text/javascript" src="kendo/js/kendo.dataviz.mobile.min.js"></script>
+        <script type="text/javascript" src="js/uuid.js"></script>
+        <script type="text/javascript" src="js/paypal-nodejs-scrapped.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
